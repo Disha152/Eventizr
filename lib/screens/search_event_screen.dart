@@ -8,6 +8,15 @@ class Search_events extends StatefulWidget {
 }
 
 class _Search_eventsState extends State<Search_events> {
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +36,10 @@ class _Search_eventsState extends State<Search_events> {
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: TextField(
+              controller: searchController,
               decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
+                hintText: 'Type event here',
+                prefixIcon: Icon(Icons.search, color: Colors.blue),
                 border: InputBorder.none,
               ),
             ),

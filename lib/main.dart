@@ -15,12 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white
+      ),
       debugShowCheckedModeBanner: false,
-      home: Search_events(),
+      home: HomeScreen(),
       initialRoute: 'home',
       routes: {
         'home':(context) => HomeScreen(),
-        'details':(context) => Event_details(),
+        'details':(context) => EventDetailsScreen(description: '', imageUrl: '', title: '', organiser_icon: '', organiser_name: '', venue_city: '', venue_country: '', venue_name: '', date_time: '',),
         'search':(context) => Search_events(),
       },
      

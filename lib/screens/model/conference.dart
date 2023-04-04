@@ -1,5 +1,3 @@
-// TODO Implement this library.
-
 class Conference {
   Content? content;
   bool? status;

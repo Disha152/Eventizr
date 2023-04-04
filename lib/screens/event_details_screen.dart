@@ -1,59 +1,147 @@
 import 'package:flutter/material.dart';
 
-class Event_details extends StatefulWidget {
-  const Event_details({super.key});
+class EventDetailsScreen extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imageUrl;
+  final String organiser_name;
+  final String organiser_icon;
+  final String venue_name;
+  final String venue_city;
+  final String venue_country;
+  final String date_time;
 
-  @override
-  State<Event_details> createState() => _Event_detailsState();
-}
+  EventDetailsScreen({
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.organiser_name,
+    required this.organiser_icon,
+    required this.venue_name,
+    required this.venue_city,
+    required this.venue_country,
+    required this.date_time,
+  });
 
-class _Event_detailsState extends State<Event_details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: BackButton(),
-        title: Text('Event Details'),
+        leading: BackButton(color: Colors.black54),
+        title: Text('Event Details',style: TextStyle(color: Colors.black54)),
         actions: [
           IconButton(
               onPressed: () {
-                icon:
-                Icon(Icons.bookmark);
+             
               },
-              icon: Icon(Icons.bookmark_border))
+              icon: Icon(Icons.bookmark_border, color: Colors.black54))
         ],
       ),
-      body: Stack(
-        children: [
-          // Add your main content here
-          Center(
-            child: Text('Hello, world!'),
+      bottomNavigationBar: BottomAppBar(
+        child: SizedBox(
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text('Book Now'),
+            ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  
-                  onPressed: () {
-                    // Do something when the button is pressed
-                  },
-                  child: Text('Book Now'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      
+        ),
+      ),
+      body:SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+            ),
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    backgroundColor: Colors.deepPurpleAccent
-                  ),
-
-
-                )),
-          ),
-        ],
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(organiser_icon),
+                          radius: 10,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          organiser_name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(Icons.calendar_today, color: Colors.blue, size: 20),
+                        SizedBox(width: 5),
+                        Text(
+                          date_time,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(Icons.location_on, color: Colors.blue, size: 20),
+                        SizedBox(width: 5),
+                        Text(
+                          '$venue_name, $venue_city, $venue_country',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'About Event',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black38,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
